@@ -1,0 +1,51 @@
+---
+title: "Class_10_7_18"
+author: "Max Weiss"
+date: "11/7/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(dplyr)
+library(fs)
+
+```
+
+```{r}
+
+data <- read_csv("data/ex_926_I.csv")
+
+summary(data)
+
+list.files(path = "data/")
+
+file_names <- dir_ls("data/")
+
+file_names_A <- dir_ls("data/", regexp = "A")
+
+file_names_A_str <- str_subset(file_names, "A")
+
+list.files(path = "data/", pattern = "*A.csv")
+
+x <- map_dfr(file_names, read_csv, .id = "source")
+
+
+x <- map_dfr(file_names, read_csv, .id = "source")
+
+x %>%
+  group_by(source) %>%
+  count() %>%
+  arrange(desc(n))
+
+
+funky <- function(file, pattern) {
+  map_dfr(file, read_csv, .id = "source")
+  }
+
+
+head(x)
+
+```
